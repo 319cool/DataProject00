@@ -1,5 +1,7 @@
 # streamlit app requirements
-streamlit>=1.20
-folium>=0.14
-streamlit-folium>=0.11
-branca>=0.6
+streamlit
+folium
+streamlit-folium
+branca
+pandas
+plotly
