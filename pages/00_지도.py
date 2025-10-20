@@ -69,8 +69,8 @@ st.caption("데이터 출처: VisitKorea, TripAdvisor, 여행 가이드 목록 �
 
 # --- requirements.txt START ---
 # streamlit app requirements
-streamlit>=1.20
-folium>=0.14
-streamlit-folium>=0.11
-branca>=0.6
+# streamlit>=1.20
+# folium>=0.14
+# streamlit-folium>=0.11
+# branca>=0.6
 # --- requirements.txt END ---
