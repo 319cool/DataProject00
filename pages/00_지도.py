@@ -5,7 +5,49 @@
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
-from folium.plugins import MarkerCluster
+from folium.plugins import MarkerCluster# FILE: app.py
+# Streamlit app that shows Top 10 popular Korean tourist spots (for foreign visitors) with Folium
+
+import streamlit as st
+from streamlit_folium import folium_static
+import folium
+
+st.set_page_config(page_title="Korea Top 10 (Folium)", layout="wide")
+
+st.title("🇰🇷 한국 인기 관광지 Top 10 — 지도 표시 (Folium)")
+st.markdown("한국의 대표 관광지 10곳을 지도에 표시했습니다. 마커를 클릭하면 간단한 설명을 볼 수 있습니다!")
+
+# 관광지 데이터
+PLACES = [
+    {"name": "경복궁 (Gyeongbokgung Palace)", "lat": 37.579617, "lon": 126.977041, "info": "조선시대 대표 궁궐, 교대식이 유명해요!"},
+    {"name": "창덕궁 (Changdeokgung Palace)", "lat": 37.582604, "lon": 126.991889, "info": "유네스코 세계유산으로 지정된 고궁이에요."},
+    {"name": "북촌한옥마을 (Bukchon Hanok Village)", "lat": 37.582178, "lon": 126.983256, "info": "한옥의 멋을 느낄 수 있는 서울 전통 거리."},
+    {"name": "남산타워 (N Seoul Tower)", "lat": 37.55117, "lon": 126.988228, "info": "서울 전경을 한눈에! 야경이 특히 예뻐요."},
+    {"name": "명동 (Myeongdong)", "lat": 37.56000, "lon": 126.98600, "info": "외국인 관광객이 가장 많이 찾는 쇼핑 거리!"},
+    {"name": "인사동 (Insadong)", "lat": 37.572962, "lon": 126.987332, "info": "전통 공예품, 찻집, 골동품 가게들이 모인 거리."},
+    {"name": "홍대 (Hongdae)", "lat": 37.550355, "lon": 126.925443, "info": "젊음의 거리, 음악과 예술이 가득한 곳."},
+    {"name": "제주도 (Jeju Island)", "lat": 33.38, "lon": 126.53, "info": "한국의 대표 휴양지! 한라산과 오름, 바다가 매력적."},
+    {"name": "해운대 (Haeundae Beach)", "lat": 35.15926, "lon": 129.16035, "info": "부산의 대표 해변! 여름엔 물놀이 천국."},
+    {"name": "임진각 (Imjingak / DMZ)", "lat": 37.886258, "lon": 126.741581, "info": "DMZ 관광의 출발지로 평화의 상징 장소."}
+]
+
+# 지도 생성 (한국 중심 좌표)
+m = folium.Map(location=[36.5, 127.8], zoom_start=7)
+
+# 마커 추가
+for place in PLACES:
+    folium.Marker(
+        location=[place['lat'], place['lon']],
+        popup=f"<b>{place['name']}</b><br>{place['info']}",
+        tooltip=place['name'],
+        icon=folium.Icon(color='blue', icon='info-sign')
+    ).add_to(m)
+
+# 지도 출력
+folium_static(m)
+
+st.caption("데이터 출처: VisitKorea, TripAdvisor, 여행 가이드 정보 종합.")
+
 
 st.set_page_config(page_title="Korea Top 10 (Folium)", layout="wide")
 
